@@ -8,7 +8,8 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "essai:prix": "node --disable-warning=ExperimentalWarning scripts/essai-prix.ts"
   },
   "dependencies": {
     "zod": "^4.6.5"

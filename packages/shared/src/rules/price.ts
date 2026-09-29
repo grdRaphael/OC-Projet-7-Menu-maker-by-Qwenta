@@ -25,11 +25,15 @@ export const priceCentsSchema = z
   .max(PRICE_MAX_CENTS, 'Le prix ne peut pas dépasser 9 999,99 €.');
 
 /**
- * Forme acceptée pour une saisie en euros : 1 à 4 chiffres, puis
+ * Forme acceptée pour une saisie en euros : des chiffres, puis
  * éventuellement une virgule (ou un point) et 1 ou 2 chiffres.
  * Exemples valides : « 12 », « 12,5 », « 12,50 », « 12.50 ».
+ *
+ * On accepte ici jusqu'à 9 chiffres avant la virgule : un prix trop élevé
+ * est ainsi LU correctement, puis refusé par la règle 1 avec le bon message
+ * (« ne peut pas dépasser 9 999,99 € ») au lieu d'un message trompeur.
  */
-const EUROS_PATTERN = /^(\d{1,4})(?:[.,](\d{1,2}))?$/;
+const EUROS_PATTERN = /^(\d{1,9})(?:[.,](\d{1,2}))?$/;
 
 /**
  * Convertit une saisie en euros vers des centimes, en travaillant sur le

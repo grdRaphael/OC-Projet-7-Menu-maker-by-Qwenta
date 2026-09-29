@@ -1,5 +1,5 @@
 {
   // Reprend les réglages communs du projet (tsconfig.base.json à la racine).
   "extends": "../../tsconfig.base.json",
-  "include": ["src"]
+  "include": ["src", "scripts"]
 }

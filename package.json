@@ -10,6 +10,9 @@
   "workspaces": [
     "packages/shared"
   ],
+  "scripts": {
+    "essai:prix": "npm run essai:prix -w @menu-maker/shared"
+  },
   "devDependencies": {
     "typescript": "~6.0.3"
   }
