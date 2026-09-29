@@ -9,7 +9,8 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "essai:prix": "node --disable-warning=ExperimentalWarning scripts/essai-prix.ts"
+    "essai:prix": "node --disable-warning=ExperimentalWarning scripts/essai-prix.ts",
+    "essai:regles": "node --disable-warning=ExperimentalWarning scripts/essai-regles.ts"
   },
   "dependencies": {
     "zod": "^4.6.5"

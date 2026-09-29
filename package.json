@@ -11,7 +11,8 @@
     "packages/shared"
   ],
   "scripts": {
-    "essai:prix": "npm run essai:prix -w @menu-maker/shared"
+    "essai:prix": "npm run essai:prix -w @menu-maker/shared",
+    "essai:regles": "npm run essai:regles -w @menu-maker/shared"
   },
   "devDependencies": {
     "typescript": "~6.0.3"
