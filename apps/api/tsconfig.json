@@ -1,0 +1,9 @@
+{
+  // Reprend les réglages communs du projet (tsconfig.base.json à la racine).
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // Types de Node.js : le serveur tourne dans Node, pas dans un navigateur.
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

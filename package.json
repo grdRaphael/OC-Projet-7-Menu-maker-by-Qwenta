@@ -9,13 +9,15 @@
   },
   "workspaces": [
     "packages/shared",
-    "apps/web"
+    "apps/web",
+    "apps/api"
   ],
   "scripts": {
     "essai:prix": "npm run essai:prix -w @menu-maker/shared",
     "essai:regles": "npm run essai:regles -w @menu-maker/shared",
     "contrat": "npm run contrat -w @menu-maker/shared",
-    "dev:web": "npm run dev -w @menu-maker/web"
+    "dev:web": "npm run dev -w @menu-maker/web",
+    "dev:api": "npm run dev -w @menu-maker/api"
   },
   "devDependencies": {
     "typescript": "~6.0.3"

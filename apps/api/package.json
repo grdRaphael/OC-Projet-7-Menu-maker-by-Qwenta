@@ -1,0 +1,21 @@
+{
+  "name": "@menu-maker/api",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Serveur (API) de Menu Maker : Fastify + TypeScript (MM-03 et suivantes)",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/server.ts",
+    "start": "tsx src/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "tsx": "^4.23.15"
+  },
+  "dependencies": {
+    "@menu-maker/shared": "^0.1.0",
+    "fastify": "^5.12.5",
+    "zod": "^4.6.5"
+  }
+}
