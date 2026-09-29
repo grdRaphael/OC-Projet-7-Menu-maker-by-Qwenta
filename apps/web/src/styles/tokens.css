@@ -1,0 +1,55 @@
+/*
+ * JETONS DE DESIGN (MM-02) — variables CSS de la charte Qwenta.
+ * Chaque composant utilise ces variables plutôt que des valeurs en dur :
+ * changer une couleur ici la change partout dans l'interface.
+ *
+ * Le thème d'un MENU (police, couleur choisies par le restaurateur) utilise
+ * d'autres variables (--menu-*), posées uniquement sur l'aperçu du menu :
+ * il ne peut donc jamais recolorer l'interface Qwenta.
+ */
+:root {
+  /* Charte Qwenta (spécifications) */
+  --color-beige: #fff4e8;
+  --color-green: #8bc7b1;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-brown: #c5a073;
+
+  /* Rôles. Le vert et le brun sont trop clairs pour du texte sur fond clair
+     (contraste < 4,5:1) : ils servent de fonds et d'accents, jamais de texte. */
+  --surface-page: var(--color-beige);
+  --surface-panel: var(--color-white);
+  --text-main: var(--color-black);
+  --text-muted: #4a4038; /* brun foncé, contraste 9,3:1 sur le beige */
+  --accent: var(--color-green);
+  --accent-strong: #2f6b55; /* vert foncé pour les textes/liens, contraste ≥ 5:1 */
+  --danger: #a3221b;
+  --success: #1e6b3c;
+  --border: #e3d6c6;
+
+  /* Contour noir épais autour de l'élément sélectionné au clavier (touche Tab). */
+  --focus-ring: 3px solid var(--color-black);
+  --focus-offset: 2px;
+
+  /* Polices de l'interface (fichiers dans public/fonts) ; Arial si elles ne chargent pas. */
+  --font-title: 'Epilogue', Arial, sans-serif;
+  --font-body: 'Work Sans', Arial, sans-serif;
+
+  /* Espacements : une échelle fixe, pour des marges régulières partout. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Arrondis des coins (petit, moyen, grand). */
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 20px;
+
+  /* Ombre légère des panneaux blancs, et largeur de la barre latérale (sous-tâche 3). */
+  --shadow-panel: 0 4px 20px rgb(0 0 0 / 0.08);
+  --sidebar-width: 260px;
+}
