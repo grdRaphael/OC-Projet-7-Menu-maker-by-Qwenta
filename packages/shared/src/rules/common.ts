@@ -26,13 +26,17 @@ function isReadable(character: string): boolean {
  * jamais interprété comme du code HTML (protection contre l'injection de code).
  */
 export function plainText(max: number, tooLongMessage: string) {
+  // `.overwrite` nettoie la valeur SANS changer son type (elle reste un texte) :
+  // contrairement à `.transform`, les limites qui suivent (max, min) restent
+  // lisibles par le contrat OpenAPI (maxLength, minLength).
   return z
     .string({ error: 'Ce champ doit être un texte.' })
-    .transform((value) => [...value].filter(isReadable).join('').trim())
-    .pipe(z.string().max(max, tooLongMessage));
+    .overwrite((value) => [...value].filter(isReadable).join(''))
+    .trim()
+    .max(max, tooLongMessage);
 }
 
 /** Même règle, mais le texte ne peut pas être vide. */
 export function requiredText(max: number, requiredMessage: string, tooLongMessage: string) {
-  return plainText(max, tooLongMessage).pipe(z.string().min(1, requiredMessage));
+  return plainText(max, tooLongMessage).min(1, requiredMessage);
 }

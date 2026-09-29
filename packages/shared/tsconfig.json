@@ -1,5 +1,7 @@
 {
   // Reprend les réglages communs du projet (tsconfig.base.json à la racine).
   "extends": "../../tsconfig.base.json",
+  // Types de Node.js : nécessaires aux scripts qui écrivent des fichiers (generer-contrat.ts).
+  "compilerOptions": { "types": ["node"] },
   "include": ["src", "scripts"]
 }

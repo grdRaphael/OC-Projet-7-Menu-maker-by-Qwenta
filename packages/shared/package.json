@@ -5,14 +5,20 @@
   "description": "Règles des données partagées par l'interface et le serveur (MM-01)",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./contract": "./src/contract/contract.ts",
+    "./contract/openapi": "./src/contract/openapi.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "essai:prix": "node --disable-warning=ExperimentalWarning scripts/essai-prix.ts",
-    "essai:regles": "node --disable-warning=ExperimentalWarning scripts/essai-regles.ts"
+    "essai:regles": "node --disable-warning=ExperimentalWarning scripts/essai-regles.ts",
+    "contrat": "node --disable-warning=ExperimentalWarning scripts/generer-contrat.ts"
   },
   "dependencies": {
     "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4"
   }
 }
