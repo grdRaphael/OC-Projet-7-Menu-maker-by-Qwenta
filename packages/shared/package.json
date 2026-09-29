@@ -1,0 +1,16 @@
+{
+  "name": "@menu-maker/shared",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Règles des données partagées par l'interface et le serveur (MM-01)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  }
+}
