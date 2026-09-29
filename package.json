@@ -1,0 +1,13 @@
+{
+  "name": "menu-maker",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Menu Maker by Qwenta — réalisation sous-tâche par sous-tâche",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3"
+  }
+}

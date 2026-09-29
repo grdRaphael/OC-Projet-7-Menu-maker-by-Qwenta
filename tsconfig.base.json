@@ -1,0 +1,15 @@
+{
+  // Réglages TypeScript communs à tout le projet (règles, serveur, interface).
+  "compilerOptions": {
+    "target": "ES2023", // version de JavaScript visée
+    "module": "ESNext", // import/export modernes
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true, // TypeScript vérifie seulement ; il ne produit pas de fichiers
+    "strict": true, // vérifications les plus strictes : attrape plus d'erreurs
+    "noUncheckedIndexedAccess": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  }
+}
