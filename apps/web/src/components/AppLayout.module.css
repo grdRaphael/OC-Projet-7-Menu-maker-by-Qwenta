@@ -1,0 +1,89 @@
+/*
+ * Structure de l'espace connecté (MM-02, sous-tâche 3) — repris de la branche « reference ».
+ * Deux colonnes : la barre latérale (largeur fixe) et le contenu (le reste).
+ */
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+}
+
+/* Lien « Aller au contenu » : caché hors de l'écran, il apparaît au premier appui sur Tab. */
+.skipLink {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 10;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-black);
+  color: var(--color-white);
+  border-radius: var(--radius-s);
+}
+.skipLink:focus {
+  top: var(--space-4);
+}
+
+/* Barre latérale blanche, avec une ombre légère qui la détache du fond beige. */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-5);
+  background: var(--surface-panel);
+  box-shadow: var(--shadow-panel);
+}
+
+.logo {
+  display: block;
+  height: 48px;
+  width: auto;
+}
+
+/* Listes de liens, sans puces, empilées verticalement. */
+.nav,
+.secondary {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* margin-top: auto pousse ce bloc tout en bas de la barre latérale. */
+.bottom {
+  margin-top: auto;
+}
+
+.link {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-m);
+  color: var(--text-main);
+  font-family: var(--font-title);
+  font-weight: 500;
+  text-decoration: none;
+}
+.link:hover {
+  background: var(--color-beige);
+}
+
+/* Lien actif : fond vert + graisse plus forte (l'information n'est pas portée par la seule couleur). */
+.active {
+  background: var(--color-green);
+  font-weight: 600;
+}
+.active:hover {
+  background: var(--color-green);
+}
+
+.smallLink {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Zone de contenu ; tabIndex={-1} permet d'y placer le focus sans contour superflu. */
+.main {
+  padding: var(--space-7);
+  outline: none;
+}

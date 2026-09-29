@@ -1,0 +1,75 @@
+/* Styles des boutons repris de la v1, qui les avait relevés dans Figma
+   (« Se connecter » : dégradé vert ; « Je me lance » : contour vert). */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 16px 24px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    transform 120ms ease;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Dégradé Figma, texte noir : contraste ≥ 10:1. */
+.primary {
+  background: linear-gradient(109deg, var(--color-green), #9fd2c6);
+  color: var(--color-black);
+}
+.primary:hover:not(:disabled) {
+  background: #a9dfca;
+}
+
+/* Contour et texte vert foncé (le vert Qwenta est trop clair pour du texte). */
+.secondary {
+  background: transparent;
+  border-color: var(--accent-strong);
+  color: var(--accent-strong);
+}
+.secondary:hover:not(:disabled) {
+  background: var(--color-white);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text-main);
+  text-decoration: underline;
+  padding-inline: var(--space-2);
+}
+
+.danger {
+  background: var(--danger);
+  color: var(--color-white);
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
