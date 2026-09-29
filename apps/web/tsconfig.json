@@ -1,0 +1,13 @@
+{
+  // Reprend les réglages communs du projet (tsconfig.base.json à la racine).
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // DOM : l'interface tourne dans un navigateur (document, window…).
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    // JSX : la syntaxe <Page /> de React, traduite par le compilateur.
+    "jsx": "react-jsx",
+    // vite/client : types des fonctions ajoutées par Vite (import.meta.env…).
+    "types": ["vite/client"]
+  },
+  "include": ["src", "vite.config.ts"]
+}

@@ -8,12 +8,14 @@
     "node": ">=22.22.0"
   },
   "workspaces": [
-    "packages/shared"
+    "packages/shared",
+    "apps/web"
   ],
   "scripts": {
     "essai:prix": "npm run essai:prix -w @menu-maker/shared",
     "essai:regles": "npm run essai:regles -w @menu-maker/shared",
-    "contrat": "npm run contrat -w @menu-maker/shared"
+    "contrat": "npm run contrat -w @menu-maker/shared",
+    "dev:web": "npm run dev -w @menu-maker/web"
   },
   "devDependencies": {
     "typescript": "~6.0.3"
