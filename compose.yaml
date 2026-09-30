@@ -3,7 +3,10 @@
 # Docker fait tourner des logiciels serveur dans des « conteneurs » isolés,
 # sans rien installer sur le Mac. Ce fichier décrit lesquels démarrer.
 #
-# Pour l'instant, un seul service : la base PostgreSQL.
+# Services actuels :
+#   - db      : la base PostgreSQL ;
+#   - adminer : une page web pour CONSULTER la base sans terminal
+#               → http://localhost:8085 (outil de développement, jamais en production).
 # D'autres s'ajouteront quand leurs cartes en auront besoin :
 #   - une boîte mail de test (MM-04, connexion par lien e-mail) ;
 #   - un stockage de fichiers compatible S3 (MM-13, photos).
@@ -36,6 +39,21 @@ services:
       interval: 3s
       timeout: 3s
       retries: 20
+
+  # ADMINER : affiche les tables et leurs lignes dans le navigateur, comme un tableur.
+  # Connexion : Système « PostgreSQL », Serveur « db », Utilisateur « menumaker »,
+  # Mot de passe « dev-menumaker », Base « menumaker ».
+  # Outil de DÉVELOPPEMENT uniquement : il donne un accès complet à la base,
+  # il ne doit jamais être déployé en production.
+  adminer:
+    image: adminer:6.1.1 # version fixée : elle ne change pas sans qu'on le décide
+    environment:
+      ADMINER_DEFAULT_SERVER: db # pré-remplit le champ « Serveur » (nom du service ci-dessus)
+    ports:
+      - '127.0.0.1:8085:8080' # joignable seulement depuis ce Mac
+    depends_on:
+      db:
+        condition: service_healthy # démarre une fois la base prête
 
 volumes:
   db-data:
