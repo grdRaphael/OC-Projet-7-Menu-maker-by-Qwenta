@@ -8,7 +8,8 @@
     "dev": "tsx watch --clear-screen=false src/server.ts",
     "start": "tsx src/server.ts",
     "typecheck": "tsc --noEmit",
-    "db:migrate": "tsx src/db/migrate.ts"
+    "db:migrate": "tsx src/db/migrate.ts",
+    "essai:proprietaire": "tsx src/essais/proprietaire.ts"
   },
   "devDependencies": {
     "@types/node": "^22.20.4",

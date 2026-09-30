@@ -3,7 +3,7 @@
 > Fichier destiné à l'agent IA (Codex, Claude Code ou autre) qui reprend ce projet.
 > Lis-le entièrement avant toute action. Il décrit QUI est l'utilisateur, COMMENT
 > travailler avec lui, OÙ en est le projet et QUELLE est la prochaine étape.
-> Dernière mise à jour : 30/09/2026, après le commit `70a1091`.
+> Dernière mise à jour : 30/09/2026, MM-03 sous-tâche 3 réalisée (voir le dernier commit).
 
 ---
 
@@ -101,6 +101,7 @@ npm run dev:web          interface
 npm run db:migrate       appliquer les migrations à la main
 npm run contrat          vérifier le contrat et régénérer docs/openapi.json + docs/contrat-api.html
 npm run essai:regles     essayer toutes les règles Zod (essai:prix : le prix seul)
+npm run essai:proprietaire  vérifier les droits avec deux comptes fictifs en base de test
 npm run typecheck -w @menu-maker/<shared|web|api>
 ```
 
@@ -111,7 +112,7 @@ npm run typecheck -w @menu-maker/<shared|web|api>
 | **MM-00** (créée par lui) | **Partielle** — Notion dit « Terminé », c'est faux ici | Fait : dépôt GitHub, workspaces, TypeScript, `.gitignore`, `apps/api/.env.example`. **Reste : ESLint, Prettier, Vitest, `.nvmrc`, README.** |
 | **MM-01** | Sous-tâches 1 et 2 faites ; **sous-tâche 3 non faite** | Règles Zod de toutes les données (`packages/shared/src/rules/`), contrat de 29 routes (`contract.ts`, champ `state` prévu/réalisé). Sous-tâche 3 = relecture du contrat par le « développeur front » (lui) : il a choisi de passer. |
 | **MM-02** | Faite | Routes publiques/privées, garde `RequireAuth` (GET /api/v1/me : 401 → /connexion ; injoignable → « Le serveur ne répond pas » + Réessayer), charte en variables CSS, Button/Modal/AppLayout, vitrine `/composants` (dev). Redirection vérifiée avec une doublure ; à revérifier avec la vraie route `/me` (MM-05). Sidebar à confronter à Figma dans MM-24. |
-| **MM-03** | Sous-tâches 1 et 2 faites | Serveur Fastify ; migration `0001_tables_de_base` (users, restaurant_profiles, menus, categories, dishes ; cascade ; `price_cents > 0` ; positions uniques DEFERRABLE) ; `/health` vérifie la base (état « réalisé » dans le contrat) ; Adminer ajouté. |
+| **MM-03** | Sous-tâches 1, 2 et 3 faites ; sous-tâche 4 à faire | Serveur Fastify ; migration `0001_tables_de_base` (users, restaurant_profiles, menus, categories, dishes ; cascade ; `price_cents > 0` ; positions uniques DEFERRABLE) ; `/health` vérifie la base (état « réalisé » dans le contrat) ; Adminer ajouté. Contrôles `ownedMenuId`, `ownedCategory`, `ownedDish` adaptés de `reference`. Essai sur PostgreSQL réel : 18 demandes via Fastify.inject, propriétaire autorisé / étranger et absent refusés (404 identiques), dans les deux sens. Typecheck API réussi. Identités fixées par l’essai, pas de session réelle ; intégration aux routes métier à vérifier lors de MM-07/09/12. |
 | MM-04 à MM-26, MM-33 | À faire | — |
 
 Choix volontaires de découpage : les tables de session et de lien e-mail viendront avec MM-04/05 (migration
@@ -120,20 +121,17 @@ affiche donc « Le serveur a répondu une erreur (404) », c'est attendu.
 
 ## 6. PROCHAINE ÉTAPE
 
-**MM-03, sous-tâche 3 : « Mettre en place le contrôle du propriétaire : chacun n'accède qu'à ses propres données. »**
-Critère : « une demande sur le menu d'un autre compte est refusée ».
-
-Piste (déjà réalisée dans la branche `reference`, fichiers `apps/api/src/auth/ownership.ts` et
-`apps/api/test/foundations.test.ts`) : fonctions `ownedMenuId`, `ownedCategory`, `ownedDish` qui remontent
-jusqu'à `menus.owner_id` et répondent `NOT_FOUND` (404, pas 403 : ne pas révéler l'existence). Sans session
-encore (MM-05), la preuve se fait au niveau des données, avec deux comptes créés en base (pas d'`ownedAssetId` :
-la table des images n'existe pas encore). Pour des tests automatiques il faudra Vitest : le signaler (c'est une
-sous-tâche de MM-00) et proposer de l'installer d'abord, ou vérifier par un script d'essai comme `essai:regles`.
-
-Ensuite : MM-03 sous-tâche 4 (README sans mot de passe) — à rapprocher du README demandé par MM-00.
+**MM-03, sous-tâche 4 : « Écrire un README qui explique comment lancer le projet, sans y mettre de mot de passe. »**
+À rapprocher du README demandé par MM-00. Relire la carte Notion avant de commencer.
+Documenter les commandes réellement disponibles et les limites actuelles ; ne pas annoncer lint/tests
+Vitest comme disponibles (outillage MM-00 encore à faire). Attendre le feu vert de Raphaël.
 
 ## 7. Décisions et hypothèses (à rappeler à l'utilisateur quand elles comptent)
 
+- Contrôle du propriétaire : fonctions réutilisables, à appeler par chaque future route avant accès.
+  `ownerId` doit venir de la session vérifiée, jamais du navigateur. Validation UUID dans les futures routes.
+  Essai autonome sans Vitest : base locale `menumaker_test`, transaction annulée en fin d’essai même en cas
+  d’échec ; aucune route d’essai ajoutée au serveur normal. Aucun changement visible dans l’interface.
 - Prix : saisi en euros, stocké en centimes entiers ; « prix positif » = strictement > 0 ; maximum 9 999,99 € (hypothèse).
 - Photos : JPEG/PNG/WebP, « 2 Mo » = 2 Mio ; logo : mêmes limites (hypothèse, à confirmer par Qwenta).
 - Polices des menus : Epilogue, Work Sans, Georgia (hypothèse : Figma inaccessible). Mises en page : une ou deux colonnes.
@@ -149,6 +147,11 @@ Ensuite : MM-03 sous-tâche 4 (README sans mot de passe) — à rapprocher du RE
 
 ## 8. Remarques Kanban déjà signalées (lui rappeler si pertinent, sans insister)
 
+- MM-03 : préciser « socle du contrôle vérifié avec deux comptes en base ; branchement aux routes
+  authentifiées et recette complète lors de MM-05/07/09/12 ». Carte encore en cours, README restant.
+- Relecture Notion du 30/09 : MM-06 et MM-17 sont désormais P1 ; MM-24 a ses spécifications ;
+  MM-25b est renseignée, MM-25c et MM-26a/b existent. Les remarques anciennes ci-dessous sur ces
+  manques sont donc résolues ; relire ces cartes à leur tour.
 - « Dépend de » est souvent inversé (ex. MM-01→MM-04, MM-03→MM-33, MM-00→MM-03) : ne garder que les prérequis réels ;
   le nouveau champ « Prérequis » pourrait servir.
 - Q1 tranchée dans MM-09 mais encore citée dans MM-10. MM-06 et MM-17 en P2 alors que le parcours P1 en dépend.
@@ -159,6 +162,9 @@ Ensuite : MM-03 sous-tâche 4 (README sans mot de passe) — à rapprocher du RE
 
 ## 9. Pièges déjà rencontrés
 
+- Essai propriétaire : `Fastify.inject` vérifie les réponses sans ouvrir de port ; ce n’est pas une
+  connexion réelle depuis le navigateur. Dans un environnement restreint, tsx et PostgreSQL peuvent
+  demander une exécution hors sandbox (EPERM).
 - **zsh** : un `*` non protégé est pris pour un motif de fichiers (`'@menu-maker/shared@*'` entre guillemets).
 - **npm workspaces** : le tout premier `npm install --workspace=...` d'un nouveau dossier peut ne rien ajouter ;
   relancer et vérifier avec `npm ls`.
