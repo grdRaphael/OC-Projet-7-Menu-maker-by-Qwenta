@@ -13,7 +13,8 @@
   planification ; **cette réalisation est personnelle**, pour découvrir les technologies.
 - Il est **débutant** : il **ne code pas lui-même**. Tu réalises, tu vérifies, tu expliques.
 - **Son livrable, c'est son Kanban Notion.** Signale-lui ce qu'il devrait corriger ou compléter dans les
-  cartes (sous-tâches, dépendances, critères, hypothèses). **Ne modifie jamais Notion toi-même.**
+  cartes (sous-tâches, dépendances, critères, hypothèses). **Ne modifie Notion que sur sa demande explicite**
+  (il l'a demandé une fois, le 30/09/2026 : voir section 8) ; sauvegarder l'état des cartes avant toute modification.
 - Langue : **français**, simple, sans jargon non expliqué. Vouvoiement dans l'interface du site ; tutoiement
   avec lui dans la conversation.
 
@@ -145,20 +146,26 @@ Vitest comme disponibles (outillage MM-00 encore à faire). Attendre le feu vert
 - GET /auth/verify : le lien de l'e-mail ouvre une page de l'interface qui appelle ensuite l'API (un antivirus
   qui pré-ouvre les liens ne consomme pas le jeton).
 
-## 8. Remarques Kanban déjà signalées (lui rappeler si pertinent, sans insister)
+## 8. Kanban Notion : état après les corrections du 30/09/2026
 
-- MM-03 : préciser « socle du contrôle vérifié avec deux comptes en base ; branchement aux routes
-  authentifiées et recette complète lors de MM-05/07/09/12 ». Carte encore en cours, README restant.
-- Relecture Notion du 30/09 : MM-06 et MM-17 sont désormais P1 ; MM-24 a ses spécifications ;
-  MM-25b est renseignée, MM-25c et MM-26a/b existent. Les remarques anciennes ci-dessous sur ces
-  manques sont donc résolues ; relire ces cartes à leur tour.
-- « Dépend de » est souvent inversé (ex. MM-01→MM-04, MM-03→MM-33, MM-00→MM-03) : ne garder que les prérequis réels ;
-  le nouveau champ « Prérequis » pourrait servir.
-- Q1 tranchée dans MM-09 mais encore citée dans MM-10. MM-06 et MM-17 en P2 alors que le parcours P1 en dépend.
-- Sans carte : première visite, changement d'e-mail, suppression du compte. MM-25b (publication Instagram) vide.
-  MM-24 : spécifications techniques vides. MM-33 (blog) demande une image par article : l'ajouter au contrat.
-- MM-02 sous-tâche 1 : deux actions dans une puce. MM-03 : ajouter une sous-tâche « environnement local Docker
-  Compose (PostgreSQL, Adminer en développement) » ; une ligne dans la section « Environnements » des spécifications.
+Corrections appliquées à sa demande (sauvegarde préalable faite ; contrôle final : aucune boucle, « Bloque »
+cohérent avec « Dépend de » sur les 39 cartes) :
+- **Structure** : l'ancienne relation « Dépend de » était synchronisée sur elle-même (chaque lien apparaissait
+  dans les deux sens). Elle est devenue une relation à deux propriétés : **« Dépend de »** (prérequis réels,
+  réécrits pour les 39 cartes) et **« Bloque »** (rempli automatiquement en sens inverse). Pour ajouter un
+  prérequis, ne remplir que « Dépend de ».
+- **Statuts** : MM-00 En cours, MM-01 En cours (validation front non faite), MM-02 À tester (redirection à
+  revérifier avec la vraie session MM-05), MM-03 En cours.
+- **Textes** : MM-02 (critère contraste reformulé, `#000000`/`#FFFFFF`) ; MM-03 (sous-tâche Docker Compose +
+  Adminer, migrations, 404 pour un autre compte, spécifications techniques complétées) ; titres corrigés
+  (MM-04 « de connexion », MM-08 sans tabulation, MM-18 sans espace) ; MM-22 : 3 points.
+- **Hypothèses à valider par Qwenta**, ajoutées en fin de « Spécifications techniques » : MM-01 (prix max,
+  plat gratuit, longueurs), MM-04 (lien 15 min), MM-05 (session 30 j), MM-07 (nom facultatif, règle « prêt »),
+  MM-13 et MM-17 (logo), MM-16 (polices).
+
+Restent à signaler si pertinent : MM-33 demande une image par article (à ajouter au contrat de l'API) ;
+MM-03 : préciser que le contrôle du propriétaire est vérifié au niveau des données et sera recetté avec les
+routes authentifiées (MM-05/07/09/12).
 
 ## 9. Pièges déjà rencontrés
 
@@ -183,7 +190,7 @@ Vitest comme disponibles (outillage MM-00 encore à faire). Attendre le feu vert
 
 ## 10. Interdits
 
-- Modifier `../v1 MM`, modifier Notion, pousser la branche `reference` sans demande.
+- Modifier `../v1 MM` ; modifier Notion ou pousser la branche `reference` sans demande explicite.
 - Envoyer un vrai e-mail, publier sur un vrai compte Instagram/Deliveroo sans demande explicite.
 - Mettre un secret réel dans Git (les identifiants `dev-…` ne servent qu'aux services locaux).
 - Déclarer une carte terminée sans que ses critères soient vérifiés dans CE projet.
