@@ -1,0 +1,41 @@
+# SERVICES LOCAUX DE MENU MAKER (développement uniquement) — MM-03, sous-tâche 2.
+#
+# Docker fait tourner des logiciels serveur dans des « conteneurs » isolés,
+# sans rien installer sur le Mac. Ce fichier décrit lesquels démarrer.
+#
+# Pour l'instant, un seul service : la base PostgreSQL.
+# D'autres s'ajouteront quand leurs cartes en auront besoin :
+#   - une boîte mail de test (MM-04, connexion par lien e-mail) ;
+#   - un stockage de fichiers compatible S3 (MM-13, photos).
+#
+# Démarrer : npm run services:up        Arrêter : npm run services:down
+# Tout effacer, données comprises :      npm run services:reset
+
+# Nom du groupe de conteneurs : différent de l'ancienne version, pour ne jamais les mélanger.
+name: menu-maker-v2
+
+services:
+  db:
+    image: postgres:17-alpine # PostgreSQL version 17, dans une image légère
+    environment:
+      # Identifiants de DÉVELOPPEMENT uniquement (base locale, jamais en production).
+      POSTGRES_USER: menumaker
+      POSTGRES_PASSWORD: dev-menumaker
+      POSTGRES_DB: menumaker
+    ports:
+      # 127.0.0.1 : joignable seulement depuis ce Mac. 5442 : l'ancienne version utilise 5432.
+      - '127.0.0.1:5442:5432'
+    volumes:
+      # Les données survivent à l'arrêt du conteneur (elles sont dans un « volume » Docker).
+      - db-data:/var/lib/postgresql/data
+      # Au tout premier démarrage : création d'une seconde base réservée aux tests.
+      - ./infra/postgres-init.sql:/docker-entrypoint-initdb.d/10-test-db.sql:ro
+    healthcheck:
+      # Docker vérifie toutes les 3 secondes que la base accepte les connexions.
+      test: ['CMD-SHELL', 'pg_isready -U menumaker -d menumaker']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  db-data:

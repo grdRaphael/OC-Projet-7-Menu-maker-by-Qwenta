@@ -82,7 +82,7 @@
           "MM-03"
         ],
         "x-carte": "MM-03",
-        "x-etat": "prévu",
+        "x-etat": "réalisé",
         "responses": {
           "200": {
             "description": "Serveur et base disponibles",

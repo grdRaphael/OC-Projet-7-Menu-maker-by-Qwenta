@@ -91,7 +91,7 @@ export const contract = {
     auth: false,
     success: { status: 200, description: 'Serveur et base disponibles', schema: healthSchema },
     errors: ['INTERNAL'],
-    state: 'prévu',
+    state: 'réalisé',
   },
 
   // ---------- Connexion (MM-04, MM-05, MM-23) ----------

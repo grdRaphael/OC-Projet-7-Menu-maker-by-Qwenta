@@ -17,7 +17,11 @@
     "essai:regles": "npm run essai:regles -w @menu-maker/shared",
     "contrat": "npm run contrat -w @menu-maker/shared",
     "dev:web": "npm run dev -w @menu-maker/web",
-    "dev:api": "npm run dev -w @menu-maker/api"
+    "dev:api": "npm run dev -w @menu-maker/api",
+    "services:up": "docker compose up -d --wait",
+    "services:down": "docker compose down",
+    "services:reset": "docker compose down -v",
+    "db:migrate": "npm run db:migrate -w @menu-maker/api"
   },
   "devDependencies": {
     "typescript": "~6.0.3"
